@@ -1,0 +1,39 @@
+# Build outputs
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.lock.json
+!packages.lock.json
+
+# Test results
+TestResults/
+coverage/
+*.trx
+*.coveragexml
+
+# Publish
+publish/
+*.pubxml
+*.pubxml.user
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore

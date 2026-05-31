@@ -1,0 +1,6 @@
+@Wex.Funding.Api_HostAddress = http://localhost:5244
+
+GET {{Wex.Funding.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Wex.Funding.Api/Wex.Funding.Api.csproj" />
+    <Project Path="src/Wex.Funding.Application/Wex.Funding.Application.csproj" />
+    <Project Path="src/Wex.Funding.Domain/Wex.Funding.Domain.csproj" />
+    <Project Path="src/Wex.Funding.Infrastructure/Wex.Funding.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Wex.Funding.Api.Tests/Wex.Funding.Api.Tests.csproj" />
+    <Project Path="tests/Wex.Funding.Application.Tests/Wex.Funding.Application.Tests.csproj" />
+    <Project Path="tests/Wex.Funding.Domain.Tests/Wex.Funding.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
