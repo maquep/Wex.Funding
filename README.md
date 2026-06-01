@@ -27,7 +27,7 @@ dotnet test
 
 > Integration tests (Wex.Funding.Api.Tests) spin up a real Postgres container via Testcontainers and require Docker. They take ~20–30 seconds on first run.
 ---
-## Wex.Funding.Api (ASP.NET Core — composition root)
+## Wex.Funding.Api (ASP.NET Core, composition root)
 - Minimal APIs
 - FluentValidation
 - Serilog
@@ -60,7 +60,7 @@ client (Polly)
 
 ## Key Design Decisions
 
-### Clean Architecture — four-project layout
+### Clean Architecture: four-project layout
 I used Clean Architecture with four-project layout for this problem. There is a strict boundary between Application and Infrastructure where the Application layer defines *what* is needed (port interfaces), the Infrastructure layer provides *how* (concrete adapters). This means the use cases are testable without a database or HTTP connection, as shown in the application-layer unit tests.
 
 ### Card and Transaction as separate aggregates
@@ -161,7 +161,7 @@ Tests cover the full end-to-end flow: create card → record transaction → get
 
 AI tooling was used deliberately and visibly throughout this exercise. I used it for: project scaffolding and DI wiring; generating EF Core configuration boilerplate; drafting the Treasury API client and DTOs; generating edge-case test scenarios for the 6-month boundary logic, which I then reviewed and pruned.
 
-Architecture decisions, aggregate boundary choices, the Result-vs-exception distinction, and the decision to exclude MediatR/CQRS/Event Sourcing were deliberate engineering judgement calls. I treated the AI as a junior pair programmer, directing the work and reviewing every output. The AI accelerated the parts of the build where speed-of-typing was the bottleneck (boilerplate, scaffolding, test enumeration); the parts that required judgement, what to model, where to draw boundaries, what not to include — were mine. This is how I use AI in production work too.
+Architecture decisions, aggregate boundary choices, the Result-vs-exception distinction, and the decision to exclude MediatR/CQRS/Event Sourcing were deliberate engineering judgement calls. I treated the AI as a junior pair programmer, directing the work and reviewing every output. The AI accelerated the parts of the build allowed me to focus more on the parts that required judgement, what to model, where to draw boundaries and what not to include.
 
 ---
 
