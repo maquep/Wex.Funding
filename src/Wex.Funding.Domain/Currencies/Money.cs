@@ -28,7 +28,9 @@ public readonly record struct Money
     private void EnsureSameCurrency(Money other)
     {
         if (Currency != other.Currency)
+        {
             throw new CurrencyMismatchException(Currency.Value, other.Currency.Value);
+        }
     }
 
     public override string ToString() => $"{Amount:F4} {Currency}";

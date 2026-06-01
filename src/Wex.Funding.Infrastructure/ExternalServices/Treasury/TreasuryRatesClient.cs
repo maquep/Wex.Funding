@@ -20,7 +20,9 @@ internal sealed class TreasuryRatesClient(
         CancellationToken cancellationToken = default)
     {
         if (currencyCode.Value.Equals("USD", StringComparison.OrdinalIgnoreCase))
+        {
             return new RateLookupResult(true, 1m, transactionDate);
+        }
 
         if (!CurrencyNameMap.TryGet(currencyCode.Value, out var treasuryName))
         {
@@ -69,7 +71,9 @@ internal sealed class TreasuryRatesClient(
         CancellationToken cancellationToken = default)
     {
         if (currencyCode.Value.Equals("USD", StringComparison.OrdinalIgnoreCase))
+        {
             return new RateLookupResult(true, 1m, DateOnly.FromDateTime(DateTime.UtcNow));
+        }
 
         if (!CurrencyNameMap.TryGet(currencyCode.Value, out var treasuryName))
         {

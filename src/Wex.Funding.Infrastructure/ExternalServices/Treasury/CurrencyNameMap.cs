@@ -3,8 +3,6 @@ namespace Wex.Funding.Infrastructure.ExternalServices.Treasury;
 public static class CurrencyNameMap
 {
     // Maps ISO 4217 codes to Treasury API descriptive names (USD-to-X rates).
-    // USD itself is the base currency and has no entry here — it cannot be a conversion target.
-    // A production implementation would maintain this from a reference dataset or RateService endpoint.
     private static readonly Dictionary<string, string> _map = new(StringComparer.OrdinalIgnoreCase)
     {
         ["AUD"] = "Australia-Dollar",
@@ -31,10 +29,8 @@ public static class CurrencyNameMap
     private static readonly HashSet<string> _knownCurrencies =
         new(_map.Keys, StringComparer.OrdinalIgnoreCase) { "USD" };
 
-    /// <summary>Returns true if the code is a currency known to this system (valid for storage).</summary>
     public static bool IsKnown(string isoCode) => _knownCurrencies.Contains(isoCode);
 
-    /// <summary>Returns true if the code can be used as a conversion target via the Treasury API.</summary>
     public static bool TryGet(string isoCode, out string treasuryName) =>
         _map.TryGetValue(isoCode, out treasuryName!);
 }
