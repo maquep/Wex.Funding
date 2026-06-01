@@ -21,12 +21,9 @@ internal sealed class ExceptionHandlerMiddleware(RequestDelegate next, ILogger<E
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        logger.LogError(exception, "Unhandled exception for {Method} {Path}: {Message}",
-            context.Request.Method, context.Request.Path, exception.Message);
-
         var (statusCode, title, detail) = exception switch
         {
-            KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found", "The requested resource was not found."),
+            KeyNotFoundException e => (StatusCodes.Status404NotFound, "Not Found", e.Message),
             InvalidCurrencyException => (StatusCodes.Status422UnprocessableEntity, "Invalid Currency", "The supplied currency code is not valid."),
             CurrencyMismatchException => (StatusCodes.Status422UnprocessableEntity, "Currency Mismatch", "The transaction currency does not match the card's currency."),
             InvalidAmountException => (StatusCodes.Status422UnprocessableEntity, "Invalid Amount", "The supplied amount is not valid."),
@@ -35,6 +32,13 @@ internal sealed class ExceptionHandlerMiddleware(RequestDelegate next, ILogger<E
             HttpRequestException => (StatusCodes.Status503ServiceUnavailable, "Service Unavailable", "An upstream service is temporarily unavailable."),
             _ => (StatusCodes.Status500InternalServerError, "Internal Server Error", "An unexpected error occurred.")
         };
+
+        if (statusCode >= 500)
+            logger.LogError(exception, "Unhandled exception for {Method} {Path}: {Message}",
+                context.Request.Method, context.Request.Path, exception.Message);
+        else
+            logger.LogWarning("Client error for {Method} {Path}: {Message}",
+                context.Request.Method, context.Request.Path, exception.Message);
 
         var problem = new ProblemDetails
         {
